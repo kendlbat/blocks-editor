@@ -17,3 +17,5 @@
     -   [ ] Do..while
 
 -   [ ] Functions
+
+-   [ ] Additional drop data for elements with subslots

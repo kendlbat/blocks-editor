@@ -3,9 +3,11 @@
     import Input from "./controls/Input.svelte";
     import Output from "./controls/Output.svelte";
     import Assignment from "./controls/Assignment.svelte";
+    import If from "./controls/If.svelte";
 </script>
 
 <Declare />
 <Input />
 <Output />
 <Assignment />
+<If />

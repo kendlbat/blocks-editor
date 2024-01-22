@@ -11,11 +11,13 @@
     programcontainer.subscribe((p) => {
         programcont = p;
     });
+
+    export let heightClass = "h-14";
 </script>
 
 <div
     bind:this={blockcont}
-    class="group flex h-14 flex-row flex-nowrap border-t-primary-600 dark:text-white [&.dragover]:border-t-4"
+    class={`${heightClass} group flex flex-row flex-nowrap border-t-primary-600 dark:text-white [&.dragover]:border-t-4`}
     role="none"
     draggable="true"
     on:dragenter={(e) => {
