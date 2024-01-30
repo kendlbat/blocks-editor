@@ -1,3 +1,5 @@
+<svelte:options accessors />
+
 <script lang="ts">
     import Block from "../Block.svelte";
     import { Select, Input } from "flowbite-svelte";
@@ -11,6 +13,14 @@
     } = {
         name: "",
         action: "",
+    };
+
+    let namebridge = p.name;
+    let actionbridge = p.action;
+
+    $: p = {
+        name: namebridge,
+        action: actionbridge,
     };
 
     declared.subscribe((d) => {
@@ -36,12 +46,12 @@
             underline
             class="inline-block w-40"
             size="sm"
-            bind:value={p.name}
+            bind:value={namebridge}
         ></Select>
         <Input
             size="sm"
             class="w-40"
-            bind:value={p.action}
+            bind:value={actionbridge}
             placeholder="Value"
         />
     </div>

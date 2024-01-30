@@ -1,3 +1,5 @@
+<svelte:options accessors />
+
 <script lang="ts">
     import Block from "../Block.svelte";
     import { Select } from "flowbite-svelte";
@@ -10,6 +12,10 @@
     } = {
         name: "",
     };
+
+    let namebridge = p.name;
+
+    $: p = { name: namebridge };
 
     declared.subscribe((d) => {
         selectable = [];
@@ -24,7 +30,7 @@
 
 <Block id="output" bind:p>
     <pre class="inst">
-        {`alert(JSON.stringify(${p.name}));`}
+        {`alert(JSON.stringify(${namebridge}));`}
     </pre>
     <div class="flex flex-row flex-nowrap gap-2">
         <span class="inline-block w-20 pt-2">OUTPUT</span>
@@ -34,7 +40,7 @@
             underline
             class="inline-block w-40"
             size="sm"
-            bind:value={p.name}
+            bind:value={namebridge}
         ></Select>
     </div>
 </Block>

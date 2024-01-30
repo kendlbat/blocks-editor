@@ -1,3 +1,5 @@
+<svelte:options accessors />
+
 <script lang="ts">
     import Block from "../Block.svelte";
     import { Input } from "flowbite-svelte";
@@ -22,8 +24,6 @@
 
     let selectable: Array<{ name: string; value: string }> = [];
 
-    $: console.log(p);
-
     declared.subscribe((d) => {
         selectable = [];
         d.forEach((v) => {
@@ -38,10 +38,13 @@
     let programbridge = p.program;
     let elifbridge = p.elifs;
     let elsebridge = p.else;
-    $: p.condition = conditionbridge;
-    $: p.program = programbridge;
-    $: p.elifs = elifbridge;
-    $: p.else = elsebridge;
+
+    $: p = {
+        condition: conditionbridge,
+        program: programbridge,
+        elifs: elifbridge,
+        else: elsebridge,
+    };
 </script>
 
 <Block id="if" heightClass="min-h-1" bind:p>

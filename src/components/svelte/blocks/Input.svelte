@@ -1,3 +1,5 @@
+<svelte:options accessors />
+
 <script lang="ts">
     import Block from "../Block.svelte";
     import { Select } from "flowbite-svelte";
@@ -9,6 +11,12 @@
         name: string;
     } = {
         name: "",
+    };
+
+    let namebridge = p.name;
+
+    $: p = {
+        name: namebridge,
     };
 
     declared.subscribe((d) => {
@@ -24,7 +32,7 @@
 
 <Block id="input" bind:p>
     <pre class="inst">
-        {`${p.name} = prompt("Enter value for variable ${p.name}:"); `}
+        {`${namebridge} = prompt("Enter value for variable ${namebridge}:"); `}
     </pre>
     <div class="flex flex-row flex-nowrap gap-2">
         <span class="inline-block w-20 pt-2">INPUT</span>
@@ -34,7 +42,7 @@
             underline
             class="inline-block w-40"
             size="sm"
-            bind:value={p.name}
+            bind:value={namebridge}
         ></Select>
     </div>
 </Block>

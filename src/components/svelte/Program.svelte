@@ -11,28 +11,30 @@
     }> = [];
 
     // On update of p
-    $: () => {
+    $: (() => {
         if (!subroutine) programcontainer.set(container);
+        if (!container) return;
+
+        p = p.filter((_) => _.p !== undefined);
 
         container.innerHTML = "";
 
-        p.forEach((b) => {
-            let el = controls[b.id]({ target: container });
-            el.$set({ p: b.p });
-        });
+        // console.log("Building program");
 
-        return () => {
-            container.innerHTML = "";
-        };
-    };
+        p.forEach((b) => {
+            let el = controls[b.id]({
+                target: container,
+                // @ts-ignore
+                props: { p: b.p },
+            });
+        });
+    })();
 
     let container: Element;
 
     export let subroutine = false;
 
     $: if (!subroutine) programcontainer.set(container);
-
-    $: console.log(draggingOver);
 </script>
 
 <div
@@ -54,19 +56,27 @@
         e.preventDefault();
         e.stopPropagation();
         draggingOver = false;
-        console.log("dropped");
 
         const data = e.dataTransfer?.getData("application/json");
         if (!data) return;
 
-        const { type, id, p } = JSON.parse(data);
+        const { type, id, persistance } = JSON.parse(data);
         if (type !== "control") return;
 
-        console.log("Create control:", type, id, p);
+        // console.log("Create control:", type, id, p);
 
-        let el = controls[id]({ target: container });
-        if (p) el.$set({ p });
-        else el.$set({ p: {} });
+        let el = controls[id]({
+            target: container,
+            // @ts-ignore
+            props: persistance != undefined ? { p: persistance } : {},
+        });
+
+        p.push({
+            id,
+            p: el.p,
+        });
+
+        p = p;
     }}
     role="main"
     style:border-color={draggingOver ? "teal" : ""}

@@ -9,7 +9,7 @@
 -   [ ] Conditionals
 
     -   [x] IF/ELSE
-    -   [ ] Switch / case
+    -   [x] Switch / case
 
 -   [ ] Loops
 

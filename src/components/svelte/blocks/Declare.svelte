@@ -1,3 +1,5 @@
+<svelte:options accessors />
+
 <script lang="ts">
     import Block from "../Block.svelte";
     import { Select, Input } from "flowbite-svelte";
@@ -19,6 +21,14 @@
         return d;
     });
 
+    let namebridge = p.name;
+    let tvalbridge = p.tval;
+
+    $: p = {
+        name: namebridge,
+        tval: tvalbridge,
+    };
+
     $: declared.update((d) => {
         if (oldname == p.name) return d;
         d.delete(oldname);
@@ -30,20 +40,20 @@
 
 <Block id="declare" bind:p>
     <pre class="inst">
-        {`let ${p.name} = ${p.tval};`}
+        {`let ${namebridge} = ${tvalbridge};`}
     </pre>
     <div class="flex flex-row flex-nowrap gap-2">
         <span class="w-20 pt-2">DECLARE</span>
         <Input
             size="sm"
             class="w-40"
-            bind:value={p.name}
+            bind:value={namebridge}
             placeholder="Variable Name"
         />
         <Input
             size="sm"
             class="w-40"
-            bind:value={p.tval}
+            bind:value={tvalbridge}
             placeholder="Initial Value"
         />
     </div>

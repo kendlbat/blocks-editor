@@ -25,20 +25,8 @@ export const controls: {
     output: (options) => new Output(options),
     // @ts-ignore
     assign: (options) => new Assignment(options),
-    if: (options, custom) => {
-        // @ts-ignore
-        let v = new If(options);
-        if (custom) {
-            v.$set(custom);
-        }
-        return v;
-    },
-    switch: (options, custom) => {
-        // @ts-ignore
-        let v = new Switch(options);
-        if (custom) {
-            v.$set(custom);
-        }
-        return v;
-    },
+    // @ts-ignore
+    if: (options) => new If(options),
+    // @ts-ignore
+    switch: (options) => new Switch(options),
 };

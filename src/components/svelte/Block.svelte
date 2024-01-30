@@ -1,20 +1,13 @@
+<svelte:options accessors />
+
 <script lang="ts">
-    import { Select } from "flowbite-svelte";
     import { TrashBinOutline } from "flowbite-svelte-icons";
     import { controls } from "@lib/scripts/controls";
-    import programcontainer from "@lib/stores/programcontainer";
 
     export let id: string;
     let blockcont: Element;
-    let programcont: Element | null = null;
 
     export let p: any;
-
-    console.log("p initial", p);
-
-    programcontainer.subscribe((p) => {
-        programcont = p;
-    });
 
     export let heightClass = "h-16";
 </script>
@@ -55,18 +48,17 @@
 
         if (type !== "control") return;
 
-        if (!programcont) return;
-        console.log(p);
-
         if (blockcont.parentElement) {
             let el = controls[id]({
                 target: blockcont.parentElement,
                 anchor: blockcont,
+                // @ts-ignore
+                props: { p: p },
             });
-            if (p) el.$set({ p });
         }
     }}
     on:dragstart={(e) => {
+        e.stopPropagation();
         e.dataTransfer?.setData(
             "application/json",
             JSON.stringify({
@@ -75,11 +67,11 @@
                 p,
             }),
         );
-        console.log("dragstart", p);
     }}
     on:dragend={(e) => {
         e.preventDefault();
         e.stopPropagation();
+        p = undefined;
         if (blockcont) blockcont.remove();
     }}
 >
