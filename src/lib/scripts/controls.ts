@@ -5,6 +5,7 @@ import Output from "@components/svelte/blocks/Output.svelte";
 import Assignment from "@components/svelte/blocks/Assignment.svelte";
 import If from "@components/svelte/blocks/If.svelte";
 import Switch from "@components/svelte/blocks/Switch.svelte";
+import While from "@components/svelte/blocks/While.svelte";
 
 interface IControl {
     id: string;
@@ -29,4 +30,6 @@ export const controls: {
     if: (options) => new If(options),
     // @ts-ignore
     switch: (options) => new Switch(options),
+    // @ts-ignore
+    while: (options) => new While(options),
 };

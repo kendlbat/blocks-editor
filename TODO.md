@@ -6,7 +6,7 @@
     -   [ ] Toggle for output "advanced" mode
 -   [x] Assignment
 
--   [ ] Conditionals
+-   [x] Conditionals
 
     -   [x] IF/ELSE
     -   [x] Switch / case
@@ -19,4 +19,9 @@
 
 -   [ ] Functions
 
--   [ ] Additional drop data for elements with subslots
+-   [x] Additional drop data for elements with subslots
+-   [ ] Step system
+-   [ ] Execution controls
+    -   [ ] Delay (s/instructions)
+    -   [ ] Pause
+    -   [ ] Stop

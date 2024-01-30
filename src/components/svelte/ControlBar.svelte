@@ -5,6 +5,7 @@
     import Assignment from "./controls/Assignment.svelte";
     import If from "./controls/If.svelte";
     import Switch from "./controls/Switch.svelte";
+    import While from "./controls/While.svelte";
 </script>
 
 <Declare />
@@ -13,3 +14,4 @@
 <Assignment />
 <If />
 <Switch />
+<While />
