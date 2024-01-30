@@ -43,9 +43,11 @@
 </script>
 
 <Block id="switch" heightClass="min-h-1" bind:p>
-    <pre class="inst">
-        {`switch (${conditionbridge.replace("`", "")}) {`}
-    </pre>
+    <input
+        type="hidden"
+        class="inst"
+        value={`// SWITCH\nswitch (${conditionbridge.replace("`", "")}) {`}
+    />
     <div class="flex flex-row flex-nowrap gap-2">
         <span class="w-20 pt-2">SWITCH</span>
         <Input
@@ -83,9 +85,11 @@
 
     {#each casebridge as scase, idx}
         <div>
-            <pre class="inst">
-                {`case (${scase.condition.replace("`", "")}): {`}
-            </pre>
+            <input
+                type="hidden"
+                class="inst"
+                value={`case (${scase.condition.replace("`", "")}): {`}
+            />
             <div class="mt-2 flex flex-row flex-nowrap gap-2">
                 <span class="w-20 pt-2">CASE</span>
                 <Input
@@ -116,21 +120,15 @@
                 <Program subroutine={true} bind:p={casebridge[idx]["program"]}
                 ></Program>
             </div>
-            <pre class="inst">
-                {`break;}`}
-            </pre>
+            <input type="hidden" class="inst" value={`break;}`} />
         </div>
     {/each}
-    <pre class="inst">
-        {`default: {`}
-    </pre>
+    <input type="hidden" class="inst" value={`default: {`} />
     <div class="mt-2 flex flex-row flex-nowrap gap-2">
         <span class="w-20 pt-2">DEFAULT</span>
     </div>
     <div class="mb-2 ml-10 mt-2 rounded bg-white bg-opacity-5">
         <Program subroutine={true} bind:p={defaultbridge}></Program>
     </div>
-    <pre class="inst">
-        {`}}`}
-    </pre>
+    <input type="hidden" class="inst" value={`}}`} />
 </Block>

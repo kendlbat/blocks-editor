@@ -4,7 +4,7 @@ export const run = async () => {
     const inst: string[] = [];
 
     document.querySelectorAll(".inst").forEach((el) => {
-        inst.push(el.innerHTML.trim());
+        if (el instanceof HTMLInputElement) inst.push(el.value);
     });
 
     console.log(inst.join("\n"));

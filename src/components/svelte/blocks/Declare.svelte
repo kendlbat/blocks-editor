@@ -39,9 +39,11 @@
 </script>
 
 <Block id="declare" bind:p>
-    <pre class="inst">
-        {`let ${namebridge} = ${tvalbridge};`}
-    </pre>
+    <input
+        type="hidden"
+        class="inst"
+        value={`// DECLARE\nlet ${namebridge} = ${tvalbridge};`}
+    />
     <div class="flex flex-row flex-nowrap gap-2">
         <span class="w-20 pt-2">DECLARE</span>
         <Input

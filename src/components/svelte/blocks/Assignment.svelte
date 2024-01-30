@@ -35,9 +35,11 @@
 </script>
 
 <Block id="assign" bind:p>
-    <pre class="inst">
-        {`${p.name} = ${p.action.replace(/\`/g, "")}`}
-    </pre>
+    <input
+        type="hidden"
+        class="inst"
+        value={`// ASSIGN\n${p.name} = ${p.action.replace(/\`/g, "")}`}
+    />
     <div class="flex flex-row flex-nowrap gap-2">
         <span class="w-20 pt-2">ASSIGN</span>
         <Select

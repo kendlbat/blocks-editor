@@ -31,9 +31,11 @@
 </script>
 
 <Block id="input" bind:p>
-    <pre class="inst">
-        {`${namebridge} = prompt("Enter value for variable ${namebridge}:"); `}
-    </pre>
+    <input
+        type="hidden"
+        class="inst"
+        value={`// INPUT\n${namebridge} = prompt("Enter value for variable ${namebridge}:"); `}
+    />
     <div class="flex flex-row flex-nowrap gap-2">
         <span class="inline-block w-20 pt-2">INPUT</span>
         <Select

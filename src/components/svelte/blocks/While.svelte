@@ -37,9 +37,11 @@
 </script>
 
 <Block id="while" heightClass="min-h-1" bind:p>
-    <pre class="inst">
-        {`while (${conditionbridge.replace("`", "")}) {`}
-    </pre>
+    <input
+        type="hidden"
+        class="inst"
+        value={`// WHILE\nwhile (${conditionbridge.replace("`", "")}) {`}
+    />
     <div class="flex flex-row flex-nowrap gap-2">
         <span class="w-20 pt-2">WHILE</span>
         <Input
@@ -52,7 +54,5 @@
     <div class="ml-10 mt-2 rounded bg-white bg-opacity-5">
         <Program subroutine={true} bind:p={programbridge}></Program>
     </div>
-    <pre class="inst">
-        {`}`}
-    </pre>
+    <input type="hidden" class="inst" value={`}`} />
 </Block>

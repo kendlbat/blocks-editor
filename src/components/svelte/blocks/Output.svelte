@@ -29,9 +29,11 @@
 </script>
 
 <Block id="output" bind:p>
-    <pre class="inst">
-        {`alert(JSON.stringify(${namebridge}));`}
-    </pre>
+    <input
+        type="hidden"
+        class="inst"
+        value={`// OUTPUT\nalert("Value of variable '${namebridge}': " + JSON.stringify(${namebridge}) + "\\nType: '" + typeof(${namebridge}) + "'");`}
+    />
     <div class="flex flex-row flex-nowrap gap-2">
         <span class="inline-block w-20 pt-2">OUTPUT</span>
         <Select

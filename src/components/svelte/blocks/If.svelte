@@ -48,9 +48,11 @@
 </script>
 
 <Block id="if" heightClass="min-h-1" bind:p>
-    <pre class="inst">
-        {`if (${conditionbridge.replace("`", "")}) {`}
-    </pre>
+    <input
+        type="hidden"
+        class="inst"
+        value={`// IF\nif (${conditionbridge.replace("`", "")}) {`}
+    />
     <div class="flex flex-row flex-nowrap gap-2">
         <span class="w-20 pt-2">IF</span>
         <Input
@@ -98,14 +100,14 @@
     <div class="ml-10 mt-2 rounded bg-white bg-opacity-5">
         <Program subroutine={true} bind:p={programbridge}></Program>
     </div>
-    <pre class="inst">
-        {`}`}
-    </pre>
+    <input type="hidden" class="inst" value={`}`} />
     {#each elifbridge as elif, idx}
         <div>
-            <pre class="inst">
-                {`else if (${elif.condition.replace("`", "")}) {`}
-            </pre>
+            <input
+                type="hidden"
+                class="inst"
+                value={`else if (${elif.condition.replace("`", "")}) {`}
+            />
             <div class="mt-2 flex flex-row flex-nowrap gap-2">
                 <span class="w-20 pt-2">ELIF</span>
                 <Input
@@ -136,21 +138,15 @@
                 <Program subroutine={true} bind:p={elifbridge[idx]["program"]}
                 ></Program>
             </div>
-            <pre class="inst">
-                {`}`}
-            </pre>
+            <input type="hidden" class="inst" value={`}`} />
         </div>
     {/each}
-    <pre class="inst">
-        {`else {`}
-    </pre>
+    <input type="hidden" class="inst" value={`else {`} />
     <div class="mt-2 flex flex-row flex-nowrap gap-2">
         <span class="w-20 pt-2">ELSE</span>
     </div>
     <div class="mb-2 ml-10 mt-2 rounded bg-white bg-opacity-5">
         <Program subroutine={true} bind:p={elsebridge}></Program>
     </div>
-    <pre class="inst">
-        {`}`}
-    </pre>
+    <input type="hidden" class="inst" value={`}`} />
 </Block>
