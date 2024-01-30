@@ -37,7 +37,7 @@
 
 <div
     bind:this={container}
-    class={`rounded border pb-4 [&>*]:border-b ${subroutine ? "h-full min-h-10 w-full" : "w-[600px]"}`}
+    class={`resize-x rounded border pb-4 [&>*]:border-b ${subroutine ? "h-full min-h-10 w-full" : "w-[600px]"}`}
     on:dragenter={(e) => {
         e.stopPropagation();
         draggingOver = true;

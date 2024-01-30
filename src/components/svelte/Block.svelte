@@ -56,8 +56,13 @@
         if (!programcont) return;
         console.log(p);
 
-        let el = controls[id]({ target: programcont, anchor: blockcont });
-        if (p) el.$set({ p });
+        if (blockcont.parentElement) {
+            let el = controls[id]({
+                target: blockcont.parentElement,
+                anchor: blockcont,
+            });
+            if (p) el.$set({ p });
+        }
     }}
     on:dragstart={(e) => {
         e.dataTransfer?.setData(
@@ -79,13 +84,22 @@
     <span class="inline-block h-full w-full pl-2 pt-2">
         <slot />
     </span>
-    <span class="my-auto opacity-0 group-hover:opacity-100">
+    <span
+        class="my-auto opacity-0 group-hover:opacity-100"
+        role="none"
+        on:keypress={(e) => {
+            e.stopPropagation();
+            if (e.key === "Enter" || e.key === " ") blockcont.remove();
+        }}
+    >
         <TrashBinOutline
-            class="ml-1.5 mr-2 h-5 w-5 cursor-pointer opacity-70 hover:text-red-500"
+            role="button"
+            tabindex="0"
             on:click={(e) => {
                 e.stopPropagation();
                 blockcont.remove();
             }}
+            class="ml-1.5 mr-2 h-5 w-5 cursor-pointer opacity-70 hover:text-red-500"
         />
     </span>
 </div>
