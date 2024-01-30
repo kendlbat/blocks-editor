@@ -8,7 +8,7 @@
 
 -   [ ] Conditionals
 
-    -   [ ] IF/ELSE
+    -   [x] IF/ELSE
     -   [ ] Switch / case
 
 -   [ ] Loops

@@ -7,17 +7,15 @@
 
     export let p: {
         condition: string;
-        program: Array<any>;
-        elifs: Array<{
+        cases: Array<{
             condition: string;
             program: Array<any>;
         }>;
-        else: Array<any>;
+        default: Array<any>;
     } = {
         condition: "",
-        program: [],
-        elifs: [],
-        else: [],
+        cases: [],
+        default: [],
     };
 
     let selectable: Array<{ name: string; value: string }> = [];
@@ -35,21 +33,19 @@
     });
 
     let conditionbridge = p.condition;
-    let programbridge = p.program;
-    let elifbridge = p.elifs;
-    let elsebridge = p.else;
+    let casebridge = p.cases;
+    let defaultbridge = p.default;
     $: p.condition = conditionbridge;
-    $: p.program = programbridge;
-    $: p.elifs = elifbridge;
-    $: p.else = elsebridge;
+    $: p.cases = casebridge;
+    $: p.default = defaultbridge;
 </script>
 
-<Block id="if" heightClass="min-h-1" bind:p>
+<Block id="switch" heightClass="min-h-1" bind:p>
     <pre class="inst">
-        {`if (${conditionbridge.replace("`", "")}) {`}
+        {`switch (${conditionbridge.replace("`", "")}) {`}
     </pre>
     <div class="flex flex-row flex-nowrap gap-2">
-        <span class="w-20 pt-2">IF</span>
+        <span class="w-20 pt-2">SWITCH</span>
         <Input
             size="sm"
             class="w-40"
@@ -61,11 +57,11 @@
             role="none"
             on:keydown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
-                    elifbridge.push({
+                    casebridge.push({
                         condition: "",
                         program: [],
                     });
-                    elifbridge = elifbridge;
+                    casebridge = casebridge;
                 }
             }}
             ><PlusSolid
@@ -73,48 +69,38 @@
                 role="button"
                 tabindex="0"
                 on:click={() => {
-                    elifbridge.push({
+                    casebridge.push({
                         condition: "",
                         program: [],
                     });
-                    elifbridge = elifbridge;
-                }}
-                on:keydown={(e) => {
-                    e.stopPropagation();
-                    if (e.key === "Enter" || e.key === " ") {
-                        elifbridge.push({
-                            condition: "",
-                            program: [],
-                        });
-                        elifbridge = elifbridge;
-                    }
+                    casebridge = casebridge;
                 }}
             ></PlusSolid></span
         >
     </div>
-    <div class="ml-10 mt-2 rounded bg-white bg-opacity-5">
-        <Program subroutine={true} bind:p={programbridge}></Program>
-    </div>
-    <pre class="inst">
-        {`}`}
-    </pre>
-    {#each elifbridge as elif, idx}
+
+    {#each casebridge as scase, idx}
         <div>
             <pre class="inst">
-                {`else if (${elif.condition.replace("`", "")}) {`}
+                {`case (${scase.condition.replace("`", "")}): {`}
             </pre>
             <div class="mt-2 flex flex-row flex-nowrap gap-2">
-                <span class="w-20 pt-2">ELIF</span>
+                <span class="w-20 pt-2">CASE</span>
                 <Input
                     size="sm"
                     class="w-40"
-                    bind:value={elif.condition}
-                    placeholder="Condition"
+                    bind:value={scase.condition}
+                    placeholder="Value"
                 />
                 <TrashBinOutline
                     class="ml-1.5 mr-2 mt-2 h-5 w-5 cursor-pointer opacity-70 hover:text-red-500 focus:text-red-500"
                     role="button"
                     tabindex="0"
+                    on:click={function (e) {
+                        e.stopPropagation();
+                        // @ts-ignore
+                        this.parentElement.parentElement.remove();
+                    }}
                     on:keydown={function (e) {
                         e.stopPropagation();
                         if (e.key === "Enter" || e.key === " ") {
@@ -122,32 +108,27 @@
                             this.parentElement.parentElement.remove();
                         }
                     }}
-                    on:click={function (e) {
-                        e.stopPropagation();
-                        // @ts-ignore
-                        this.parentElement.parentElement.remove();
-                    }}
                 />
             </div>
             <div class="ml-10 mt-2 rounded bg-white bg-opacity-5">
-                <Program subroutine={true} bind:p={elifbridge[idx]["program"]}
+                <Program subroutine={true} bind:p={casebridge[idx]["program"]}
                 ></Program>
             </div>
             <pre class="inst">
-                {`}`}
+                {`break;}`}
             </pre>
         </div>
     {/each}
     <pre class="inst">
-        {`else {`}
+        {`default: {`}
     </pre>
     <div class="mt-2 flex flex-row flex-nowrap gap-2">
-        <span class="w-20 pt-2">ELSE</span>
+        <span class="w-20 pt-2">DEFAULT</span>
     </div>
     <div class="mb-2 ml-10 mt-2 rounded bg-white bg-opacity-5">
-        <Program subroutine={true} bind:p={elsebridge}></Program>
+        <Program subroutine={true} bind:p={defaultbridge}></Program>
     </div>
     <pre class="inst">
-        {`}`}
+        {`}}`}
     </pre>
 </Block>

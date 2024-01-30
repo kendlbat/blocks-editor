@@ -62,7 +62,7 @@
         const { type, id, p } = JSON.parse(data);
         if (type !== "control") return;
 
-        console.log("Create control:", id);
+        console.log("Create control:", type, id, p);
 
         let el = controls[id]({ target: container });
         if (p) el.$set({ p });

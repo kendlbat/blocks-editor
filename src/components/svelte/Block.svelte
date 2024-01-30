@@ -10,16 +10,18 @@
 
     export let p: any;
 
+    console.log("p initial", p);
+
     programcontainer.subscribe((p) => {
         programcont = p;
     });
 
-    export let heightClass = "h-14";
+    export let heightClass = "h-16";
 </script>
 
 <div
     bind:this={blockcont}
-    class={`${heightClass} group flex flex-row flex-nowrap border-t-primary-600 dark:text-white [&.dragover]:border-t-4`}
+    class={`${heightClass} group flex flex-row flex-nowrap border-t-primary-600 pb-[4px] dark:text-white [&.dragover]:border-t-4 [&:not(.dragover)]:pt-[4px]`}
     role="none"
     draggable="true"
     on:dragenter={(e) => {
@@ -85,7 +87,7 @@
         <slot />
     </span>
     <span
-        class="my-auto opacity-0 group-hover:opacity-100"
+        class="my-auto opacity-0 group-focus-within:opacity-100 group-hover:opacity-100"
         role="none"
         on:keypress={(e) => {
             e.stopPropagation();

@@ -4,6 +4,7 @@ import Input from "@components/svelte/blocks/Input.svelte";
 import Output from "@components/svelte/blocks/Output.svelte";
 import Assignment from "@components/svelte/blocks/Assignment.svelte";
 import If from "@components/svelte/blocks/If.svelte";
+import Switch from "@components/svelte/blocks/Switch.svelte";
 
 interface IControl {
     id: string;
@@ -27,6 +28,14 @@ export const controls: {
     if: (options, custom) => {
         // @ts-ignore
         let v = new If(options);
+        if (custom) {
+            v.$set(custom);
+        }
+        return v;
+    },
+    switch: (options, custom) => {
+        // @ts-ignore
+        let v = new Switch(options);
         if (custom) {
             v.$set(custom);
         }

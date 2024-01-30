@@ -4,6 +4,7 @@
     import Output from "./controls/Output.svelte";
     import Assignment from "./controls/Assignment.svelte";
     import If from "./controls/If.svelte";
+    import Switch from "./controls/Switch.svelte";
 </script>
 
 <Declare />
@@ -11,3 +12,4 @@
 <Output />
 <Assignment />
 <If />
+<Switch />
