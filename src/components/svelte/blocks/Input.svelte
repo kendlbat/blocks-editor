@@ -5,19 +5,26 @@
 
     let selectable: Array<{ name: string; value: string }> = [];
 
-    export let name: string = "";
+    export let p: {
+        name: string;
+    } = {
+        name: "",
+    };
 
     declared.subscribe((d) => {
-        selectable = Object.values(d).map((v) => ({
-            value: v.name,
-            name: v.name,
-        }));
+        selectable = [];
+        d.forEach((v) => {
+            selectable.push({
+                value: v,
+                name: v,
+            });
+        });
     });
 </script>
 
-<Block id="input">
+<Block id="input" bind:p>
     <pre class="inst">
-        {`vars["${name}"] = {"type": vars["${name}"].type, "value": prompt("Enter value for variable ${name}: (type " + vars["${name}"].type + ")") };`}
+        {`${p.name} = prompt("Enter value for variable ${p.name}:"); `}
     </pre>
     <div class="flex flex-row flex-nowrap gap-2">
         <span class="inline-block w-20 pt-2">INPUT</span>
@@ -27,7 +34,7 @@
             underline
             class="inline-block w-40"
             size="sm"
-            bind:value={name}
+            bind:value={p.name}
         ></Select>
     </div>
 </Block>

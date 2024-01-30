@@ -5,20 +5,28 @@
 
     let selectable: Array<{ name: string; value: string }> = [];
 
-    export let name = "";
-    export let action = "";
+    export let p: {
+        name: string;
+        action: string;
+    } = {
+        name: "",
+        action: "",
+    };
 
     declared.subscribe((d) => {
-        selectable = Object.values(d).map((v) => ({
-            value: v.name,
-            name: v.name,
-        }));
+        selectable = [];
+        d.forEach((v) => {
+            selectable.push({
+                value: v,
+                name: v,
+            });
+        });
     });
 </script>
 
-<Block id="assign">
+<Block id="assign" bind:p>
     <pre class="inst">
-        {`vars["${name}"] = {"type": vars["${name}"].type, "value": eval(\`${JSON.stringify(action.replace(/\`/g, ""))}\`)} ;`}
+        {`${p.name} = ${p.action.replace(/\`/g, "")}`}
     </pre>
     <div class="flex flex-row flex-nowrap gap-2">
         <span class="w-20 pt-2">ASSIGN</span>
@@ -26,10 +34,15 @@
             items={selectable}
             placeholder=""
             underline
-            class="inline-block w-20"
+            class="inline-block w-40"
             size="sm"
-            bind:value={name}
+            bind:value={p.name}
         ></Select>
-        <Input size="sm" class="w-40" bind:value={action} placeholder="Value" />
+        <Input
+            size="sm"
+            class="w-40"
+            bind:value={p.action}
+            placeholder="Value"
+        />
     </div>
 </Block>

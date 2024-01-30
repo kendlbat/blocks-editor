@@ -5,19 +5,26 @@
 
     let selectable: Array<{ name: string; value: string }> = [];
 
-    export let name = "";
+    export let p: {
+        name: string;
+    } = {
+        name: "",
+    };
 
     declared.subscribe((d) => {
-        selectable = Object.values(d).map((v) => ({
-            value: v.name,
-            name: v.name,
-        }));
+        selectable = [];
+        d.forEach((v) => {
+            selectable.push({
+                value: v,
+                name: v,
+            });
+        });
     });
 </script>
 
-<Block id="output">
+<Block id="output" bind:p>
     <pre class="inst">
-        {`alert(JSON.stringify(vars["${name}"]));`}
+        {`alert(JSON.stringify(${p.name}));`}
     </pre>
     <div class="flex flex-row flex-nowrap gap-2">
         <span class="inline-block w-20 pt-2">OUTPUT</span>
@@ -27,7 +34,7 @@
             underline
             class="inline-block w-40"
             size="sm"
-            bind:value={name}
+            bind:value={p.name}
         ></Select>
     </div>
 </Block>

@@ -3,6 +3,7 @@
 -   [x] Declaration
 -   [x] Input
 -   [x] Output
+    -   [ ] Toggle for output "advanced" mode
 -   [x] Assignment
 
 -   [ ] Conditionals

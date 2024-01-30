@@ -8,6 +8,8 @@
     let blockcont: Element;
     let programcont: Element | null = null;
 
+    export let p: any;
+
     programcontainer.subscribe((p) => {
         programcont = p;
     });
@@ -47,13 +49,15 @@
         let data = e.dataTransfer?.getData("application/json");
         if (!data) return;
 
-        const { type, id } = JSON.parse(data);
+        const { type, id, p } = JSON.parse(data);
 
         if (type !== "control") return;
 
         if (!programcont) return;
+        console.log(p);
 
-        controls[id]({ target: programcont, anchor: blockcont });
+        let el = controls[id]({ target: programcont, anchor: blockcont });
+        if (p) el.$set({ p });
     }}
     on:dragstart={(e) => {
         e.dataTransfer?.setData(
@@ -61,13 +65,15 @@
             JSON.stringify({
                 type: "control",
                 id,
+                p,
             }),
         );
+        console.log("dragstart", p);
     }}
     on:dragend={(e) => {
         e.preventDefault();
         e.stopPropagation();
-        blockcont.remove();
+        if (blockcont) blockcont.remove();
     }}
 >
     <span class="inline-block h-full w-full pl-2 pt-2">

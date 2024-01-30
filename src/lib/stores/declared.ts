@@ -1,8 +1,6 @@
 import { writable } from "svelte/store";
 
-const declared = writable<{ [key: string]: { type: string; name: string } }>(
-    {},
-);
+const declared = writable<Set<string>>(new Set());
 
 declared.subscribe((v) => {
     console.log(v);
