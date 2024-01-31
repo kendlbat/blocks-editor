@@ -77,7 +77,7 @@ alert("Value of variable '${namebridge}': " + JSON.stringify(${namebridge}) + "\
                 size="md"
                 class="ml-2 w-full"
                 bind:value={namebridge}
-                placeholder="Value"
+                placeholder="Expression"
             />
         {/if}
         <button
