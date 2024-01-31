@@ -1,3 +1,5 @@
+import stepdelay from "@lib/stores/stepdelay";
+
 export const run = async () => {
     console.log("Running");
 
@@ -14,8 +16,11 @@ export const run = async () => {
             });
     });
 
+    let delay: number = 0;
+    stepdelay.subscribe((v) => (delay = v));
+
     // Function declarations to be used in eval
-    function __step(idx: number): void {
+    async function __step(idx: number): Promise<void> {
         console.log("Stepping", idx);
         // TODO: Implement logic for pause, delay, step and stop
 
@@ -28,12 +33,27 @@ export const run = async () => {
             curr.classList.add("active");
         }
 
+        await new Promise((resolve) => {
+            setTimeout(resolve, delay);
+        });
+
         confirm("Step");
     }
 
     let readyToRun: string = inst.reduce((acc: string, curr, idx) => {
-        return acc + curr.inst.replace("__step()", `__step(${idx})`) + "\n";
+        return (
+            acc + curr.inst.replace("__step()", `await __step(${idx})`) + "\n"
+        );
     }, "");
+
+    readyToRun = `(async () => {
+${readyToRun}
+(async () => {
+// cleanup
+let prev = document.querySelector(".statementblock.active");
+if (prev) prev.classList.remove("active");
+})();
+})();`;
 
     console.log(readyToRun);
 
