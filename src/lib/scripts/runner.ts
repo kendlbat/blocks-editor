@@ -2,6 +2,9 @@ import stepdelay from "@lib/stores/stepdelay";
 import { writable } from "svelte/store";
 
 let running: boolean = false;
+let stoprequest: boolean = false;
+let stepresolve: (() => void) | undefined = undefined;
+
 export let runningListener = writable(false);
 
 export const run = async () => {
@@ -9,6 +12,7 @@ export const run = async () => {
     console.log("Running");
     running = true;
     runningListener.set(true);
+    stoprequest = false;
 
     const inst: Array<{
         inst: string;
@@ -34,15 +38,32 @@ export const run = async () => {
         let prev = document.querySelector(".statementblock.active");
         if (prev) prev.classList.remove("active");
 
+        if (stoprequest) {
+            running = false;
+            runningListener.set(false);
+            stoprequest = false;
+            throw new Error("Stop requested");
+        }
+
         // Find parent with statementblock class
         let curr = inst[idx].elem.closest(".statementblock");
         if (curr) {
             curr.classList.add("active");
         }
 
-        await new Promise((resolve) => {
-            setTimeout(resolve, delay);
+        await new Promise<void>((resolve) => {
+            stepresolve = resolve;
+            setTimeout(() => resolve(), delay);
         });
+
+        if (stoprequest) {
+            let prev = document.querySelector(".statementblock.active");
+            if (prev) prev.classList.remove("active");
+            running = false;
+            runningListener.set(false);
+            stoprequest = false;
+            throw new Error("Stop requested");
+        }
 
         // confirm("Step");
     }
@@ -76,4 +97,9 @@ runningListener.set(false);
     } catch (e) {
         alert(`Error:\n${e}`);
     }
+};
+
+export const stop = async () => {
+    stoprequest = true;
+    if (stepresolve !== undefined) stepresolve();
 };

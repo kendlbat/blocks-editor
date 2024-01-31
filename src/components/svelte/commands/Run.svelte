@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Button } from "flowbite-svelte";
+    import { Button, Tooltip } from "flowbite-svelte";
     import { PlaySolid } from "flowbite-svelte-icons";
     import { run, runningListener } from "@lib/scripts/runner";
 
@@ -13,3 +13,4 @@
 <Button on:click={run} disabled={running}>
     <PlaySolid class="h-3 w-3"></PlaySolid>
 </Button>
+<Tooltip>Run</Tooltip>

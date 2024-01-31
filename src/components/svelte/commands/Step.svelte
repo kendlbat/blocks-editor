@@ -1,6 +1,8 @@
 <script lang="ts">
     import stepdelay from "@lib/stores/stepdelay";
 
+    import { Tooltip } from "flowbite-svelte";
+
     let stepdelaybridge = 100;
 
     $: stepdelay.set(stepdelaybridge);
@@ -19,3 +21,4 @@
         bind:value={stepdelaybridge}
     />
 </span>
+<Tooltip>Delay per step (ms)</Tooltip>

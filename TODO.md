@@ -11,10 +11,10 @@
     -   [x] IF/ELSE
     -   [x] Switch / case
 
--   [ ] Loops
+-   [x] Loops
 
     -   [x] While
-    -   [ ] For
+    -   [x] For
     -   [x] Do..while
 
 -   [ ] Functions
@@ -25,6 +25,6 @@
 -   [ ] Execution controls
     -   [x] Delay (s/instructions)
     -   [ ] Pause
-    -   [ ] Stop
+    -   [x] Stop
 
 -   [ ] Replace prompt(), alert(), etc. with flowbite modals
