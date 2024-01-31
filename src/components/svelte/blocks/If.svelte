@@ -5,6 +5,7 @@
     import { Input } from "flowbite-svelte";
     import { PlusSolid, TrashBinOutline } from "flowbite-svelte-icons";
     import Program from "../Program.svelte";
+    export const id: string = "if";
 
     export let destroy: () => void;
     export let p: {

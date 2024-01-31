@@ -15,24 +15,19 @@ interface IControl {
 
 export const controls: {
     [key: string]: (
-        options: ComponentConstructorOptions<Record<string, any>>,
+        options: ComponentConstructorOptions<{
+            p: any;
+            destroy: () => void;
+        }>,
         custom?: Record<string, any>,
-    ) => SvelteComponent;
+    ) => SvelteComponent<{ p?: any; id?: string; destroy: () => void }>;
 } = {
-    // @ts-ignore
     declare: (options) => new Declare(options),
-    // @ts-ignore
     input: (options) => new Input(options),
-    // @ts-ignore
     output: (options) => new Output(options),
-    // @ts-ignore
     assign: (options) => new Assignment(options),
-    // @ts-ignore
     if: (options) => new If(options),
-    // @ts-ignore
     switch: (options) => new Switch(options),
-    // @ts-ignore
     while: (options) => new While(options),
-    // @ts-ignore
     dowhile: (options) => new DoWhile(options),
 };

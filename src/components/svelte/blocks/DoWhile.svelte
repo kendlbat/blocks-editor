@@ -4,6 +4,7 @@
     import Block from "../Block.svelte";
     import { Input } from "flowbite-svelte";
     import Program from "../Program.svelte";
+    export const id: string = "dowhile";
     export let destroy: () => void;
     export let p: {
         condition: string;

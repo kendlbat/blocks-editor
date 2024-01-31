@@ -6,6 +6,7 @@
 
     let selectable: Array<{ name: string; value: string }> = [];
 
+    export const id: string = "assign";
     export let destroy: () => void;
     export let p:
         | {

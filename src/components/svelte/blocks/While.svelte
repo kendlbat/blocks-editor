@@ -5,6 +5,7 @@
     import { Input } from "flowbite-svelte";
     import Program from "../Program.svelte";
     export let destroy: () => void;
+    export const id: string = "while";
     export let p: {
         condition: string;
         program: Array<any>;

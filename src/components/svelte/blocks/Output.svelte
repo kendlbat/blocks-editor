@@ -6,6 +6,7 @@
     export let destroy: () => void;
     let selectable: Array<{ name: string; value: string }> = [];
 
+    export const id: string = "output";
     export let p: {
         name: string;
     } = {

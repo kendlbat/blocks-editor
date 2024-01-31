@@ -4,6 +4,7 @@
     import Block from "../Block.svelte";
     import { Select } from "flowbite-svelte";
     export let destroy: () => void;
+    export const id: string = "input";
 
     let selectable: Array<{ name: string; value: string }> = [];
 

@@ -50,9 +50,8 @@
         );
     }}
     on:dragend={(e) => {
-        if (e.dataTransfer?.dropEffect !== "none") {
-            destroy();
-        }
+        console.log("Dragend");
+        destroy();
     }}
 >
     <span class="inline-block h-full w-full pl-2 pt-2">

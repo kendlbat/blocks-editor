@@ -4,6 +4,7 @@
     import Block from "../Block.svelte";
     import { Input } from "flowbite-svelte";
     export let destroy: () => void;
+    export const id: string = "declare";
     export let p: {
         name: string;
         tval: any;
