@@ -9,13 +9,13 @@
     export let p: {
         variable: string;
         initial: any;
-        increment: any;
+        increment: string;
         end: any;
         program: Array<any>;
     } = {
         variable: "",
         initial: 0,
-        increment: 1,
+        increment: "1",
         program: [],
         end: "",
     };
@@ -63,7 +63,12 @@
         class="inst"
         value={`// FOR
 __step();
-for (let ${variablebridge} = ${initialbridge}; ${variablebridge} ${incrementbridge > 0 ? "<" : ">"} ${endbridge}; ${variablebridge} += ${incrementbridge}) {`}
+for (let ${variablebridge} = ${initialbridge}; ${variablebridge} ${
+            isNaN(parseFloat(incrementbridge)) ||
+            parseFloat(incrementbridge) >= 0
+                ? "<"
+                : ">"
+        } ${endbridge}; ${variablebridge} += ${incrementbridge}) {`}
     />
     <div class="flex flex-row flex-nowrap gap-2">
         <span class="w-20 pt-2">FOR</span>
@@ -84,7 +89,10 @@ for (let ${variablebridge} = ${initialbridge}; ${variablebridge} ${incrementbrid
         />
         <span class="pt-2"
             >; {variablebridge.trim() != "" ? variablebridge : "?"}
-            {incrementbridge > 0 ? "<" : ">"}</span
+            {isNaN(parseFloat(incrementbridge)) ||
+            parseFloat(incrementbridge) >= 0
+                ? "<"
+                : ">"}</span
         >
         <Input
             size="sm"
@@ -100,6 +108,9 @@ for (let ${variablebridge} = ${initialbridge}; ${variablebridge} ${incrementbrid
             size="sm"
             class="w-16 text-center"
             bind:value={incrementbridge}
+            color={incrementbridge === undefined || incrementbridge.trim() == ""
+                ? "red"
+                : "base"}
             placeholder="Increment"
         />
     </div>
