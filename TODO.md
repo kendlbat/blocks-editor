@@ -2,6 +2,7 @@
 
 -   [x] Declaration
 -   [x] Input
+    -   [ ] Type selector (ask again if not matched)
 -   [x] Output
     -   [x] Toggle for output "advanced" mode
 -   [x] Assignment
@@ -35,3 +36,5 @@
     -   [ ] Export (custom)
     -   [ ] Import (custom)
 -   [ ] Replace prompt(), alert(), etc. with flowbite modals
+
+-   [ ] Stack monitor (variables / values table)
