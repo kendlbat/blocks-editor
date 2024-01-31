@@ -6,6 +6,7 @@
     import If from "./controls/If.svelte";
     import Switch from "./controls/Switch.svelte";
     import While from "./controls/While.svelte";
+    import DoWhile from "./controls/DoWhile.svelte";
 </script>
 
 <div class="flex flex-row flex-wrap gap-1">
@@ -16,4 +17,5 @@
     <If />
     <Switch />
     <While />
+    <DoWhile />
 </div>

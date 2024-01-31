@@ -21,7 +21,7 @@
 
     let declared = new Set<string>();
 
-    document.addEventListener("declupdate", () => {
+    const updateDecl = () => {
         let el: NodeListOf<HTMLInputElement> =
             document.querySelectorAll("input.decl");
         declared.clear();
@@ -35,7 +35,10 @@
                 name: v,
             });
         });
-    });
+    };
+
+    document.addEventListener("declupdate", updateDecl);
+    updateDecl();
 </script>
 
 <Block id="input" bind:p {destroy}>

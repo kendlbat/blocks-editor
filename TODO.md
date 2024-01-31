@@ -13,16 +13,18 @@
 
 -   [ ] Loops
 
-    -   [ ] While
+    -   [x] While
     -   [ ] For
-    -   [ ] Do..while
+    -   [x] Do..while
 
 -   [ ] Functions
 
 -   [x] Additional drop data for elements with subslots
 -   [ ] Step system
-    -   [ ] Mark currently executing block
+    -   [x] Mark currently executing block
 -   [ ] Execution controls
-    -   [ ] Delay (s/instructions)
+    -   [x] Delay (s/instructions)
     -   [ ] Pause
     -   [ ] Stop
+
+-   [ ] Replace prompt(), alert(), etc. with flowbite modals

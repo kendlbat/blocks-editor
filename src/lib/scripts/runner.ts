@@ -37,7 +37,7 @@ export const run = async () => {
             setTimeout(resolve, delay);
         });
 
-        confirm("Step");
+        // confirm("Step");
     }
 
     // @ts-ignore
