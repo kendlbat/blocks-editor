@@ -3,42 +3,60 @@
 <script lang="ts">
     import Block from "../Block.svelte";
     import { Select, Input } from "flowbite-svelte";
-    import declared from "@lib/stores/declared";
 
     let selectable: Array<{ name: string; value: string }> = [];
 
-    export let p: {
-        name: string;
-        action: string;
-    } = {
-        name: "",
-        action: "",
-    };
+    export let destroy: () => void;
+    export let p:
+        | {
+              name: string;
+              action: string;
+          }
+        | undefined;
+
+    if (!p)
+        p = {
+            name: "",
+            action: "",
+        };
 
     let namebridge = p.name;
     let actionbridge = p.action;
 
-    $: p = {
-        name: namebridge,
-        action: actionbridge,
-    };
+    let declared: Set<string> = new Set();
 
-    declared.subscribe((d) => {
+    const updateDecl = () => {
+        let el: NodeListOf<HTMLInputElement> =
+            document.querySelectorAll("input.decl");
+        declared.clear();
+        el.forEach((e) => {
+            declared.add(e.value);
+        });
         selectable = [];
-        d.forEach((v) => {
+        declared.forEach((v) => {
             selectable.push({
                 value: v,
                 name: v,
             });
         });
-    });
+    };
+
+    document.addEventListener("declupdate", updateDecl);
+    updateDecl();
+
+    $: p = {
+        name: namebridge,
+        action: actionbridge,
+    };
 </script>
 
-<Block id="assign" bind:p>
+<Block id="assign" bind:p {destroy}>
     <input
         type="hidden"
         class="inst"
-        value={`// ASSIGN\n${p.name} = ${p.action.replace(/\`/g, "")}`}
+        value={`// ASSIGN
+__step();
+${namebridge} = ${actionbridge.trim() == "" ? "undefined" : actionbridge};`}
     />
     <div class="flex flex-row flex-nowrap gap-2">
         <span class="w-20 pt-2">ASSIGN</span>
@@ -48,6 +66,10 @@
             underline
             class="inline-block w-40"
             size="sm"
+            on:change={function () {
+                // @ts-ignore
+                namebridge = this.value;
+            }}
             bind:value={namebridge}
         ></Select>
         <Input

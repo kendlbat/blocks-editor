@@ -3,8 +3,7 @@
 <script lang="ts">
     import Block from "../Block.svelte";
     import { Select } from "flowbite-svelte";
-    import declared from "@lib/stores/declared";
-
+    export let destroy: () => void;
     let selectable: Array<{ name: string; value: string }> = [];
 
     export let p: {
@@ -17,22 +16,35 @@
 
     $: p = { name: namebridge };
 
-    declared.subscribe((d) => {
+    let declared = new Set<string>();
+
+    const updateDecl = () => {
+        let el: NodeListOf<HTMLInputElement> =
+            document.querySelectorAll("input.decl");
+        declared.clear();
+        el.forEach((e) => {
+            declared.add(e.value);
+        });
         selectable = [];
-        d.forEach((v) => {
+        declared.forEach((v) => {
             selectable.push({
                 value: v,
                 name: v,
             });
         });
-    });
+    };
+
+    document.addEventListener("declupdate", updateDecl);
+    updateDecl();
 </script>
 
-<Block id="output" bind:p>
+<Block id="output" bind:p {destroy}>
     <input
         type="hidden"
         class="inst"
-        value={`// OUTPUT\nalert("Value of variable '${namebridge}': " + JSON.stringify(${namebridge}) + "\\nType: '" + typeof(${namebridge}) + "'");`}
+        value={`// OUTPUT
+__step();
+alert("Value of variable '${namebridge}': " + JSON.stringify(${namebridge}) + "\\nType: '" + typeof(${namebridge}) + "'");`}
     />
     <div class="flex flex-row flex-nowrap gap-2">
         <span class="inline-block w-20 pt-2">OUTPUT</span>

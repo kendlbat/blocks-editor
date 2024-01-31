@@ -2,59 +2,67 @@
 
 <script lang="ts">
     import Block from "../Block.svelte";
-    import { Select, Input } from "flowbite-svelte";
-    import declared from "@lib/stores/declared";
-
+    import { Input } from "flowbite-svelte";
+    export let destroy: () => void;
     export let p: {
         name: string;
         tval: any;
     } = {
-        name: "v1",
-        tval: 0,
+        name: "",
+        tval: "",
     };
-
-    let oldname = p.name;
-
-    declared.update((d) => {
-        if (d.has(p.name)) return d;
-        d = d.add(p.name);
-        return d;
-    });
 
     let namebridge = p.name;
     let tvalbridge = p.tval;
+
+    let declarationinp: HTMLInputElement;
+
+    $: namebridge &&
+        (() => {
+            if (!declarationinp) return;
+            declarationinp.value = namebridge;
+            document.dispatchEvent(new CustomEvent("declupdate"));
+        })();
 
     $: p = {
         name: namebridge,
         tval: tvalbridge,
     };
-
-    $: declared.update((d) => {
-        if (oldname == p.name) return d;
-        d.delete(oldname);
-        d = d.add(p.name);
-        oldname = p.name;
-        return d;
-    });
 </script>
 
-<Block id="declare" bind:p>
+<Block id="declare" bind:p {destroy}>
+    <input
+        bind:this={declarationinp}
+        type="hidden"
+        class="decl"
+        value={namebridge}
+    />
     <input
         type="hidden"
         class="inst"
-        value={`// DECLARE\nlet ${namebridge} = ${tvalbridge};`}
+        value={`// DECLARE
+__step();
+let ${namebridge} = ${tvalbridge};`}
     />
     <div class="flex flex-row flex-nowrap gap-2">
         <span class="w-20 pt-2">DECLARE</span>
         <Input
             size="sm"
             class="w-40"
+            on:input={function () {
+                // @ts-ignore
+                namebridge = this.value;
+            }}
             bind:value={namebridge}
             placeholder="Variable Name"
         />
         <Input
             size="sm"
             class="w-40"
+            on:input={function () {
+                // @ts-ignore
+                tvalbridge = this.value;
+            }}
             bind:value={tvalbridge}
             placeholder="Initial Value"
         />

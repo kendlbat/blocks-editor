@@ -3,10 +3,10 @@
 <script lang="ts">
     import Block from "../Block.svelte";
     import { Input } from "flowbite-svelte";
-    import declared from "@lib/stores/declared";
     import { PlusSolid, TrashBinOutline } from "flowbite-svelte-icons";
     import Program from "../Program.svelte";
 
+    export let destroy: () => void;
     export let p: {
         condition: string;
         program: Array<any>;
@@ -22,18 +22,6 @@
         else: [],
     };
 
-    let selectable: Array<{ name: string; value: string }> = [];
-
-    declared.subscribe((d) => {
-        selectable = [];
-        d.forEach((v) => {
-            selectable.push({
-                value: v,
-                name: v,
-            });
-        });
-    });
-
     let conditionbridge = p.condition;
     let programbridge = p.program;
     let elifbridge = p.elifs;
@@ -47,11 +35,13 @@
     };
 </script>
 
-<Block id="if" heightClass="min-h-1" bind:p>
+<Block id="if" heightClass="min-h-1" bind:p {destroy}>
     <input
         type="hidden"
         class="inst"
-        value={`// IF\nif (${conditionbridge.replace("`", "")}) {`}
+        value={`// IF
+__step();
+if (${conditionbridge.replace("`", "")}) {`}
     />
     <div class="flex flex-row flex-nowrap gap-2">
         <span class="w-20 pt-2">IF</span>

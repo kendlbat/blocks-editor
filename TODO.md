@@ -21,6 +21,7 @@
 
 -   [x] Additional drop data for elements with subslots
 -   [ ] Step system
+    -   [ ] Mark currently executing block
 -   [ ] Execution controls
     -   [ ] Delay (s/instructions)
     -   [ ] Pause

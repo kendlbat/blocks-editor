@@ -3,7 +3,7 @@
 <script lang="ts">
     import Block from "../Block.svelte";
     import { Select } from "flowbite-svelte";
-    import declared from "@lib/stores/declared";
+    export let destroy: () => void;
 
     let selectable: Array<{ name: string; value: string }> = [];
 
@@ -19,9 +19,17 @@
         name: namebridge,
     };
 
-    declared.subscribe((d) => {
+    let declared = new Set<string>();
+
+    document.addEventListener("declupdate", () => {
+        let el: NodeListOf<HTMLInputElement> =
+            document.querySelectorAll("input.decl");
+        declared.clear();
+        el.forEach((e) => {
+            declared.add(e.value);
+        });
         selectable = [];
-        d.forEach((v) => {
+        declared.forEach((v) => {
             selectable.push({
                 value: v,
                 name: v,
@@ -30,11 +38,13 @@
     });
 </script>
 
-<Block id="input" bind:p>
+<Block id="input" bind:p {destroy}>
     <input
         type="hidden"
         class="inst"
-        value={`// INPUT\n${namebridge} = prompt("Enter value for variable ${namebridge}:"); `}
+        value={`// INPUT
+__step();
+${namebridge} = prompt("Enter value for variable ${namebridge}:"); `}
     />
     <div class="flex flex-row flex-nowrap gap-2">
         <span class="inline-block w-20 pt-2">INPUT</span>

@@ -8,10 +8,12 @@
     import While from "./controls/While.svelte";
 </script>
 
-<Declare />
-<Input />
-<Output />
-<Assignment />
-<If />
-<Switch />
-<While />
+<div class="flex flex-row flex-wrap gap-1">
+    <Declare />
+    <Input />
+    <Output />
+    <Assignment />
+    <If />
+    <Switch />
+    <While />
+</div>

@@ -14,8 +14,8 @@ interface IControl {
 
 export const controls: {
     [key: string]: (
-        options: ComponentConstructorOptions<Record<string, never>>,
-        custom?: Record<string, never>,
+        options: ComponentConstructorOptions<Record<string, any>>,
+        custom?: Record<string, any>,
     ) => SvelteComponent;
 } = {
     // @ts-ignore

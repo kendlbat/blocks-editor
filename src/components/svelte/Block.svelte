@@ -2,29 +2,27 @@
 
 <script lang="ts">
     import { TrashBinOutline } from "flowbite-svelte-icons";
-    import { controls } from "@lib/scripts/controls";
+    export let destroy: () => void;
 
     export let id: string;
-    let blockcont: Element;
+    let blockcont: HTMLDivElement;
 
-    export let p: any;
+    export let p: Record<string, any> | undefined;
 
     export let heightClass = "h-16";
 </script>
 
 <div
     bind:this={blockcont}
-    class={`${heightClass} group flex flex-row flex-nowrap border-t-primary-600 pb-[4px] dark:text-white [&.dragover]:border-t-4 [&:not(.dragover)]:pt-[4px]`}
+    class={`statementblock ${heightClass} group flex flex-row flex-nowrap border-t-primary-600 pb-[4px] dark:text-white [&.dragover]:border-t-4 [&:not(.dragover)]:pt-[4px]`}
     role="none"
     draggable="true"
     on:dragenter={(e) => {
-        e.preventDefault();
         e.stopPropagation();
 
         blockcont.classList.add("dragover");
     }}
     on:dragleave={(e) => {
-        e.preventDefault();
         e.stopPropagation();
 
         blockcont.classList.remove("dragover");
@@ -38,24 +36,7 @@
         }
     }}
     on:drop={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        blockcont.classList.remove("dragover");
-        let data = e.dataTransfer?.getData("application/json");
-        if (!data) return;
-
-        const { type, id, p } = JSON.parse(data);
-
-        if (type !== "control") return;
-
-        if (blockcont.parentElement) {
-            let el = controls[id]({
-                target: blockcont.parentElement,
-                anchor: blockcont,
-                // @ts-ignore
-                props: { p: p },
-            });
-        }
+        blockcont?.classList.remove("dragover");
     }}
     on:dragstart={(e) => {
         e.stopPropagation();
@@ -69,10 +50,9 @@
         );
     }}
     on:dragend={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        p = undefined;
-        if (blockcont) blockcont.remove();
+        if (e.dataTransfer?.dropEffect !== "none") {
+            destroy();
+        }
     }}
 >
     <span class="inline-block h-full w-full pl-2 pt-2">
