@@ -2,7 +2,7 @@
 
 <script lang="ts">
     import Block from "../Block.svelte";
-    import { Select, Input } from "flowbite-svelte";
+    import { Select, Input, Tooltip } from "flowbite-svelte";
     import { BullhornOutline } from "flowbite-svelte-icons";
     export let destroy: () => void;
     let selectable: Array<{ name: string; value: string }> = [];
@@ -81,15 +81,16 @@ alert("Value of variable '${namebridge}': " + JSON.stringify(${namebridge}) + "\
             />
         {/if}
         <button
-            class="px-2 opacity-0 hover:text-primary-600 focus:text-primary-600 group-hover:opacity-70"
+            class="px-2 hover:text-primary-600 focus:text-primary-600"
             on:click={() => {
                 advancedbridge = !advancedbridge;
             }}
         >
             <BullhornOutline
-                class={"h-5 w-5" +
+                class={"h-5 w-5 opacity-0 group-hover:opacity-70" +
                     (advancedbridge ? " -mt-[2px]" : " mt-[2px]")}
             />
+            <Tooltip class="opacity-100">Toggle advanced mode</Tooltip>
         </button>
     </div>
 </Block>

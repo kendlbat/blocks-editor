@@ -1,6 +1,7 @@
 <svelte:options accessors />
 
 <script lang="ts">
+    import { Tooltip } from "flowbite-svelte";
     import { TrashBinOutline } from "flowbite-svelte-icons";
     export let destroy: () => void;
 
@@ -70,9 +71,10 @@
             tabindex="0"
             on:click={(e) => {
                 e.stopPropagation();
-                blockcont.remove();
+                destroy();
             }}
             class="ml-1.5 mr-2 h-5 w-5 cursor-pointer opacity-70 hover:text-red-500"
         />
+        <Tooltip>Delete</Tooltip>
     </span>
 </div>
