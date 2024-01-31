@@ -40,9 +40,14 @@ export const run = async () => {
         confirm("Step");
     }
 
+    // @ts-ignore
+    globalThis.__step = __step;
+
     let readyToRun: string = inst.reduce((acc: string, curr, idx) => {
         return (
-            acc + curr.inst.replace("__step()", `await __step(${idx})`) + "\n"
+            acc +
+            curr.inst.replace("__step()", `await globalThis.__step(${idx})`) +
+            "\n"
         );
     }, "");
 
