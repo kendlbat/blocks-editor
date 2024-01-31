@@ -7,6 +7,7 @@ import If from "@components/svelte/blocks/If.svelte";
 import Switch from "@components/svelte/blocks/Switch.svelte";
 import While from "@components/svelte/blocks/While.svelte";
 import DoWhile from "@components/svelte/blocks/DoWhile.svelte";
+import For from "@components/svelte/blocks/For.svelte";
 
 interface IControl {
     id: string;
@@ -38,4 +39,6 @@ export const controls: {
     while: (options) => new While(options),
     // @ts-ignore
     dowhile: (options) => new DoWhile(options),
+    // @ts-ignore
+    for: (options) => new For(options),
 };

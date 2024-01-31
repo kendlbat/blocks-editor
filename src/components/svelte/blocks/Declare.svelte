@@ -43,7 +43,7 @@
         class="inst"
         value={`// DECLARE
 __step();
-let ${namebridge} = ${tvalbridge};`}
+let ${namebridge} = ${tvalbridge.trim() == "" ? "undefined" : tvalbridge};`}
     />
     <div class="flex flex-row flex-nowrap gap-2">
         <span class="w-20 pt-2">DECLARE</span>
@@ -55,6 +55,7 @@ let ${namebridge} = ${tvalbridge};`}
                 namebridge = this.value;
             }}
             bind:value={namebridge}
+            color={namebridge.trim() == "" ? "red" : "base"}
             placeholder="Variable Name"
         />
         <Input

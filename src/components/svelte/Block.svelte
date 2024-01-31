@@ -50,7 +50,7 @@
         );
     }}
     on:dragend={(e) => {
-        console.log("Dragend");
+        e.stopPropagation();
         destroy();
     }}
 >

@@ -2,4 +2,4 @@
     import ControlBlock from "../ControlBlock.svelte";
 </script>
 
-<ControlBlock id="output" name="OUTPUT"></ControlBlock>
+<ControlBlock id="output" name="OUTPUT" />

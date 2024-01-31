@@ -2,4 +2,4 @@
     import ControlBlock from "../ControlBlock.svelte";
 </script>
 
-<ControlBlock id="if" name="IF"></ControlBlock>
+<ControlBlock id="if" name="IF" tooltip="IF-Loop" />

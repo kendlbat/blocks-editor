@@ -2,4 +2,4 @@
     import ControlBlock from "../ControlBlock.svelte";
 </script>
 
-<ControlBlock id="while" name="WHILE"></ControlBlock>
+<ControlBlock id="while" name="WHILE" />

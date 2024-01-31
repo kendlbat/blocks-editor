@@ -30,7 +30,6 @@
 
             elements = [];
             p.forEach((b) => {
-                console.log(b);
                 let el = controls[b.id]({
                     target: container,
                     // @ts-ignore
@@ -66,7 +65,7 @@
         }));
     }
 
-    $: console.log(p);
+    // $: console.log(p);
 </script>
 
 <div

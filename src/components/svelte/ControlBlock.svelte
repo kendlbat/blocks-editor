@@ -5,8 +5,11 @@
     [SLOT] -> For dropping other control blocks
     
     */
+    import { Tooltip } from "flowbite-svelte";
+
     export let id: string;
     export let name: string = id;
+    export let tooltip: string | undefined = undefined;
 
     function createControlClick() {
         return;
@@ -34,5 +37,8 @@
         }
     }}
 >
-    {name}
+    <span>{name}</span>
+    {#if tooltip !== undefined}
+        <Tooltip>{tooltip}</Tooltip>
+    {/if}
 </div>
