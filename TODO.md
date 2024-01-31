@@ -28,3 +28,7 @@
     -   [x] Stop
 
 -   [ ] Replace prompt(), alert(), etc. with flowbite modals
+-   [ ] Transfer logic
+    -   [x] Export (js)
+    -   [ ] Export (custom)
+    -   [ ] Import (custom)

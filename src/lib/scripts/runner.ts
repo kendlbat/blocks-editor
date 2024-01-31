@@ -14,19 +14,6 @@ export const run = async () => {
     runningListener.set(true);
     stoprequest = false;
 
-    const inst: Array<{
-        inst: string;
-        elem: HTMLInputElement;
-    }> = [];
-
-    document.querySelectorAll(".inst").forEach((el) => {
-        if (el instanceof HTMLInputElement)
-            inst.push({
-                inst: el.value,
-                elem: el,
-            });
-    });
-
     let delay: number = 0;
     stepdelay.subscribe((v) => (delay = v));
 
@@ -70,6 +57,19 @@ export const run = async () => {
 
     // @ts-ignore
     globalThis.__step = __step;
+
+    const inst: Array<{
+        inst: string;
+        elem: HTMLInputElement;
+    }> = [];
+
+    document.querySelectorAll(".inst").forEach((el) => {
+        if (el instanceof HTMLInputElement)
+            inst.push({
+                inst: el.value,
+                elem: el,
+            });
+    });
 
     let readyToRun: string = inst.reduce((acc: string, curr, idx) => {
         return (
