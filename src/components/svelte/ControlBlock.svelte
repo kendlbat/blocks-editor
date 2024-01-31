@@ -38,7 +38,7 @@
     }}
 >
     <span>{name}</span>
-    {#if tooltip !== undefined}
-        <Tooltip>{tooltip}</Tooltip>
-    {/if}
 </div>
+{#if tooltip !== undefined}
+    <Tooltip>{tooltip}</Tooltip>
+{/if}
