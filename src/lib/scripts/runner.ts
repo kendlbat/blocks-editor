@@ -1,7 +1,14 @@
 import stepdelay from "@lib/stores/stepdelay";
+import { writable } from "svelte/store";
+
+let running: boolean = false;
+export let runningListener = writable(false);
 
 export const run = async () => {
+    if (running) return;
     console.log("Running");
+    running = true;
+    runningListener.set(true);
 
     const inst: Array<{
         inst: string;
@@ -57,6 +64,8 @@ ${readyToRun}
 // cleanup
 let prev = document.querySelector(".statementblock.active");
 if (prev) prev.classList.remove("active");
+running = false;
+runningListener.set(false);
 })();
 })();`;
 
