@@ -84,14 +84,15 @@ try {
 ${readyToRun}
 } catch (e) {
     alert("Error:\n" + e);
+} finally {
+    (async () => {
+    // cleanup
+    let prev = document.querySelector(".statementblock.active");
+    if (prev) prev.classList.remove("active");
+    running = false;
+    runningListener.set(false);
+    })();
 }
-(async () => {
-// cleanup
-let prev = document.querySelector(".statementblock.active");
-if (prev) prev.classList.remove("active");
-running = false;
-runningListener.set(false);
-})();
 })();`;
 
     console.log(readyToRun);
