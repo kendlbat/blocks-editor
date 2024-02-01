@@ -24,9 +24,15 @@
         element.click();
         element.remove();
     };
+
+    const exportCustom = () => {};
 </script>
 
 <Button on:click={exportJS}>
     <FileExportSolid class="h-3 w-3" />
 </Button>
 <Tooltip>Export to JavaScript</Tooltip>
+<Button on:click={exportCustom}>
+    <span></span>
+</Button>
+<Tooltip>Export as kbb</Tooltip>

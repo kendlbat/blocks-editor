@@ -80,7 +80,11 @@ export const run = async () => {
     }, "");
 
     readyToRun = `(async () => {
+try {
 ${readyToRun}
+} catch (e) {
+    alert("Error:\n" + e);
+}
 (async () => {
 // cleanup
 let prev = document.querySelector(".statementblock.active");
@@ -92,11 +96,7 @@ runningListener.set(false);
 
     console.log(readyToRun);
 
-    try {
-        eval(readyToRun);
-    } catch (e) {
-        alert(`Error:\n${e}`);
-    }
+    eval(readyToRun);
 };
 
 export const stop = async () => {
