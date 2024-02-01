@@ -70,7 +70,7 @@
 
 <div
     bind:this={container}
-    class={`resize-x rounded border pb-4 [&>*.statementblock.active]:border-[3px] [&>*.statementblock.active]:border-primary-600 [&>*]:border-b ${subroutine ? "h-full min-h-10 w-full" : "w-[600px]"}`}
+    class={`resize-x rounded border pb-4 [&>*.statementblock.active]:border-[3px] [&>*.statementblock.active]:border-primary-600 [&>*.statementblock.error]:border-[3px] [&>*.statementblock.error]:border-red-600 [&>*]:border-b ${subroutine ? "h-full min-h-10 w-full" : "w-[600px]"}`}
     on:dragenter={(e) => {
         e.stopPropagation();
         draggingOver = true;

@@ -14,6 +14,12 @@ export const run = async () => {
     runningListener.set(true);
     stoprequest = false;
 
+    let preverr = document.querySelectorAll(".statementblock.error");
+
+    preverr.forEach((el) => {
+        el.classList.remove("error");
+    });
+
     let delay: number = 0;
     stepdelay.subscribe((v) => (delay = v));
 
@@ -83,7 +89,9 @@ export const run = async () => {
 try {
 ${readyToRun}
 } catch (e) {
-    alert("Error:\n" + e);
+    let prev = document.querySelector(".statementblock.active");
+    if (prev) prev.classList.add("error");
+    alert("Error:\\n" + e);
 } finally {
     (async () => {
     // cleanup
