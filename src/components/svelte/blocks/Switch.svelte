@@ -45,7 +45,7 @@ switch (${conditionbridge.replace("`", "")}) {`}
             size="sm"
             class="w-40"
             bind:value={conditionbridge}
-            on:change={() => setTimeout(updateAllP, 10)}
+            on:change={async () => setTimeout(updateAllP, 1)}
             placeholder="Condition"
         />
         <span
@@ -88,7 +88,7 @@ switch (${conditionbridge.replace("`", "")}) {`}
                     size="sm"
                     class="w-40"
                     bind:value={scase.condition}
-                    on:change={() => setTimeout(updateAllP, 10)}
+                    on:change={async () => setTimeout(updateAllP, 1)}
                     placeholder="Value"
                 />
                 <TrashBinOutline

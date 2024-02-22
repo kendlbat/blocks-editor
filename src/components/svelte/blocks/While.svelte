@@ -39,7 +39,7 @@ while (${conditionbridge.replace("`", "")}) {`}
             class="w-40"
             bind:value={conditionbridge}
             placeholder="Condition"
-            on:change={() => setTimeout(updateAllP, 10)}
+            on:change={async () => setTimeout(updateAllP, 1)}
         />
     </div>
     <div class="ml-10 mt-2 rounded bg-white bg-opacity-5">

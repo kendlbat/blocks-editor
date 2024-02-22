@@ -71,7 +71,7 @@ alert("Value of variable '${namebridge}': " + JSON.stringify(${namebridge}) + "\
                 class="ml-2 inline-block w-[calc(100%-2rem)]"
                 size="sm"
                 bind:value={namebridge}
-                on:change={() => setTimeout(updateAllP, 10)}
+                on:change={async () => setTimeout(updateAllP, 1)}
             />
             <span class="w-full"></span>
         {:else}
@@ -79,7 +79,7 @@ alert("Value of variable '${namebridge}': " + JSON.stringify(${namebridge}) + "\
                 size="md"
                 class="ml-2 w-full"
                 bind:value={namebridge}
-                on:change={() => setTimeout(updateAllP, 10)}
+                on:change={async () => setTimeout(updateAllP, 1)}
                 placeholder="Expression"
             />
         {/if}

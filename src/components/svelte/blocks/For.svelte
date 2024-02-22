@@ -86,7 +86,7 @@ for (let ${variablebridge} = ${initialbridge}; ${variablebridge} ${
             size="sm"
             class="w-16 text-center"
             bind:value={initialbridge}
-            on:change={() => setTimeout(updateAllP, 10)}
+            on:change={async () => setTimeout(updateAllP, 1)}
             placeholder="Start"
         />
         <span class="pt-2"
@@ -101,7 +101,7 @@ for (let ${variablebridge} = ${initialbridge}; ${variablebridge} ${
             class={`w-16 text-center`}
             color={endbridge.trim() == "" ? "red" : "base"}
             bind:value={endbridge}
-            on:change={() => setTimeout(updateAllP, 10)}
+            on:change={async () => setTimeout(updateAllP, 1)}
             placeholder="End"
         />
         <span class="pt-2"
@@ -111,7 +111,7 @@ for (let ${variablebridge} = ${initialbridge}; ${variablebridge} ${
             size="sm"
             class="w-16 text-center"
             bind:value={incrementbridge}
-            on:change={() => setTimeout(updateAllP, 10)}
+            on:change={async () => setTimeout(updateAllP, 1)}
             color={incrementbridge === undefined || incrementbridge.trim() == ""
                 ? "red"
                 : "base"}

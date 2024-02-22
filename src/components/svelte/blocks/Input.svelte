@@ -60,7 +60,7 @@ ${namebridge} = prompt("Enter value for variable ${namebridge}:"); `}
             class="inline-block w-40"
             size="sm"
             bind:value={namebridge}
-            on:change={() => setTimeout(updateAllP, 10)}
+            on:change={async () => setTimeout(updateAllP, 1)}
         ></Select>
     </div>
 </Block>

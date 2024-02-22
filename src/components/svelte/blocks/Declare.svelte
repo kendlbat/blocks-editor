@@ -56,7 +56,7 @@ let ${namebridge} = ${tvalbridge.trim() == "" ? "undefined" : tvalbridge};`}
                 namebridge = this.value;
             }}
             bind:value={namebridge}
-            on:change={() => setTimeout(updateAllP, 10)}
+            on:change={async () => setTimeout(updateAllP, 1)}
             color={namebridge.trim() == "" ? "red" : "base"}
             placeholder="Variable Name"
         />
@@ -68,7 +68,7 @@ let ${namebridge} = ${tvalbridge.trim() == "" ? "undefined" : tvalbridge};`}
                 tvalbridge = this.value;
             }}
             bind:value={tvalbridge}
-            on:change={() => setTimeout(updateAllP, 10)}
+            on:change={async () => setTimeout(updateAllP, 1)}
             placeholder="Initial Value"
         />
     </div>

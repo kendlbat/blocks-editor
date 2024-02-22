@@ -51,7 +51,7 @@ if (${conditionbridge.replace("`", "")}) {`}
             size="sm"
             class="w-40"
             bind:value={conditionbridge}
-            on:change={() => setTimeout(updateAllP, 10)}
+            on:change={async () => setTimeout(updateAllP, 1)}
             placeholder="Condition"
         />
         <span
@@ -107,7 +107,7 @@ if (${conditionbridge.replace("`", "")}) {`}
                     size="sm"
                     class="w-40"
                     bind:value={elif.condition}
-                    on:change={() => setTimeout(updateAllP, 10)}
+                    on:change={async () => setTimeout(updateAllP, 1)}
                     placeholder="Condition"
                 />
                 <TrashBinOutline

@@ -78,7 +78,7 @@ ${namebridge} = ${actionbridge.trim() == "" ? "undefined" : actionbridge};`}
             size="sm"
             class="w-40"
             bind:value={actionbridge}
-            on:change={() => setTimeout(updateAllP, 10)}
+            on:change={async () => setTimeout(updateAllP, 1)}
             placeholder="Value"
         />
     </div>
