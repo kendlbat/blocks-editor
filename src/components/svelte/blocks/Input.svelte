@@ -1,6 +1,7 @@
 <svelte:options accessors />
 
 <script lang="ts">
+    import { updateAllP } from "@lib/util";
     import Block from "../Block.svelte";
     import { Select } from "flowbite-svelte";
     export let destroy: () => void;
@@ -59,6 +60,7 @@ ${namebridge} = prompt("Enter value for variable ${namebridge}:"); `}
             class="inline-block w-40"
             size="sm"
             bind:value={namebridge}
+            on:change={() => setTimeout(updateAllP, 10)}
         ></Select>
     </div>
 </Block>

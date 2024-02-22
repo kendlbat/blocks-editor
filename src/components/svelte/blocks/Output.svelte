@@ -1,6 +1,7 @@
 <svelte:options accessors />
 
 <script lang="ts">
+    import { updateAllP } from "@lib/util";
     import Block from "../Block.svelte";
     import { Select, Input, Tooltip } from "flowbite-svelte";
     import { BullhornOutline } from "flowbite-svelte-icons";
@@ -70,6 +71,7 @@ alert("Value of variable '${namebridge}': " + JSON.stringify(${namebridge}) + "\
                 class="ml-2 inline-block w-[calc(100%-2rem)]"
                 size="sm"
                 bind:value={namebridge}
+                on:change={() => setTimeout(updateAllP, 10)}
             />
             <span class="w-full"></span>
         {:else}
@@ -77,6 +79,7 @@ alert("Value of variable '${namebridge}': " + JSON.stringify(${namebridge}) + "\
                 size="md"
                 class="ml-2 w-full"
                 bind:value={namebridge}
+                on:change={() => setTimeout(updateAllP, 10)}
                 placeholder="Expression"
             />
         {/if}
