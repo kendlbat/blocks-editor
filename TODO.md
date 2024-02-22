@@ -33,8 +33,16 @@
 -   [ ] Functions
 -   [ ] Transfer logic
     -   [x] Export (js)
-    -   [ ] Export (custom)
-    -   [ ] Import (custom)
+    -   [x] Export (custom)
+    -   [x] Import (custom)
+    -   [ ] PDF
 -   [ ] Replace prompt(), alert(), etc. with flowbite modals
 
 -   [ ] Stack monitor (variables / values table)
+
+## Bonus features
+
+-   [ ] Live code preview (JS)
+-   [ ] Gamification?
+    -   [ ] Achievements?
+-   [ ] Examples

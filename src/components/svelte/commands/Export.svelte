@@ -1,6 +1,12 @@
 <script lang="ts">
     import { Button, Tooltip } from "flowbite-svelte";
-    import { FileExportSolid } from "flowbite-svelte-icons";
+    import {
+        DownloadSolid,
+        FileExportSolid,
+        UploadSolid,
+    } from "flowbite-svelte-icons";
+    import mainprogram from "@lib/stores/mainprogram";
+    import { updateAllP } from "@lib/util";
 
     const exportJS = () => {
         const inst: Array<string> = [];
@@ -25,7 +31,40 @@
         element.remove();
     };
 
-    const exportCustom = () => {};
+    const exportCustom = () => {
+        updateAllP();
+        let exp = JSON.stringify($mainprogram);
+
+        // Download
+        const element = document.createElement("a");
+        const file = new Blob([exp], { type: "text/plain" });
+        element.href = URL.createObjectURL(file);
+        element.download = "export.kbb";
+        document.body.appendChild(element); // Required for this to work in FireFox
+        element.click();
+        element.remove();
+    };
+
+    const importCustom = () => {
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = ".kbb";
+        input.onchange = (e) => {
+            const file = (e.target as HTMLInputElement).files?.[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const contents = e.target?.result;
+                    if (typeof contents === "string") {
+                        mainprogram.set(JSON.parse(contents));
+                    }
+                };
+                reader.readAsText(file);
+            }
+            input.remove();
+        };
+        input.click();
+    };
 </script>
 
 <Button on:click={exportJS}>
@@ -33,6 +72,10 @@
 </Button>
 <Tooltip>Export to JavaScript</Tooltip>
 <Button on:click={exportCustom}>
-    <span></span>
+    <DownloadSolid class="h-3 w-3" />
 </Button>
-<Tooltip>Export as kbb</Tooltip>
+<Tooltip>Export kbb</Tooltip>
+<Button on:click={importCustom}>
+    <UploadSolid class="h-3 w-3" />
+</Button>
+<Tooltip>Import kbb</Tooltip>

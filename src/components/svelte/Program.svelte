@@ -65,26 +65,31 @@
         }));
     }
 
+    $: container?.addEventListener("updatep", updateP);
+
     // $: console.log(p);
 </script>
 
 <div
     bind:this={container}
-    class={`resize-x rounded border pb-4 [&>*.statementblock.active]:border-[3px] [&>*.statementblock.active]:border-primary-600 [&>*.statementblock.error]:border-[3px] [&>*.statementblock.error]:border-red-600 [&>*]:border-b ${subroutine ? "h-full min-h-10 w-full" : "w-[600px]"}`}
+    class={`programcontainer resize-x rounded border pb-4 print:border-b-0 print:pb-0 [&>*.statementblock.active]:border-[3px] [&>*.statementblock.active]:border-primary-600 [&>*.statementblock.error]:border-[3px] [&>*.statementblock.error]:border-red-600 [&>*]:border-b ${subroutine ? "h-full min-h-10 w-full" : "w-[600px]"}`}
     on:dragenter={(e) => {
         e.stopPropagation();
         draggingOver = true;
+        updateP();
     }}
     on:dragleave={(e) => {
         e.stopPropagation();
         draggingOver = false;
+        updateP();
     }}
     on:dragover={(e) => {
         e.stopPropagation();
         e.preventDefault();
+        updateP();
     }}
     on:drop={function (e) {
-        e.stopImmediatePropagation();
+        e.stopPropagation();
         draggingOver = false;
 
         const data = e.dataTransfer?.getData("application/json");
@@ -92,7 +97,6 @@
 
         const j = JSON.parse(data);
         if (j.type !== "control") return;
-
         let el;
         const rid = runningid++;
 

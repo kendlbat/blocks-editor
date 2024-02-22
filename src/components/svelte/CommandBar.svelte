@@ -5,7 +5,7 @@
     import Export from "./commands/Export.svelte";
 </script>
 
-<div class="flex flex-row flex-wrap gap-1">
+<div class="flex flex-row flex-wrap gap-1 print:hidden">
     <Run />
     <Step />
     <Stop />

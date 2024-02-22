@@ -67,7 +67,7 @@ alert("Value of variable '${namebridge}': " + JSON.stringify(${namebridge}) + "\
                 items={selectable}
                 placeholder=""
                 underline
-                class="ml-2 inline-block w-80"
+                class="ml-2 inline-block w-[calc(100%-2rem)]"
                 size="sm"
                 bind:value={namebridge}
             />

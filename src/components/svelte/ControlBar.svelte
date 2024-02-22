@@ -10,7 +10,7 @@
     import For from "./controls/For.svelte";
 </script>
 
-<div class="flex flex-row flex-wrap gap-1">
+<div class="flex flex-row flex-wrap gap-1 print:hidden">
     <Declare />
     <Input />
     <Output />
