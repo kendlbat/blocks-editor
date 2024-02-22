@@ -1,6 +1,7 @@
 <svelte:options accessors />
 
 <script lang="ts">
+    import { updateAllP } from "@lib/util";
     import Block from "../Block.svelte";
     import { Input } from "flowbite-svelte";
     export let destroy: () => void;
@@ -55,6 +56,7 @@ let ${namebridge} = ${tvalbridge.trim() == "" ? "undefined" : tvalbridge};`}
                 namebridge = this.value;
             }}
             bind:value={namebridge}
+            on:change={() => setTimeout(updateAllP, 10)}
             color={namebridge.trim() == "" ? "red" : "base"}
             placeholder="Variable Name"
         />
@@ -66,6 +68,7 @@ let ${namebridge} = ${tvalbridge.trim() == "" ? "undefined" : tvalbridge};`}
                 tvalbridge = this.value;
             }}
             bind:value={tvalbridge}
+            on:change={() => setTimeout(updateAllP, 10)}
             placeholder="Initial Value"
         />
     </div>

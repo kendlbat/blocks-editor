@@ -5,6 +5,7 @@
     import { Input } from "flowbite-svelte";
     import { PlusSolid, TrashBinOutline } from "flowbite-svelte-icons";
     import Program from "../Program.svelte";
+    import { updateAllP } from "@lib/util";
     export const id: string = "if";
 
     export let destroy: () => void;
@@ -50,6 +51,7 @@ if (${conditionbridge.replace("`", "")}) {`}
             size="sm"
             class="w-40"
             bind:value={conditionbridge}
+            on:change={() => setTimeout(updateAllP, 10)}
             placeholder="Condition"
         />
         <span
@@ -105,6 +107,7 @@ if (${conditionbridge.replace("`", "")}) {`}
                     size="sm"
                     class="w-40"
                     bind:value={elif.condition}
+                    on:change={() => setTimeout(updateAllP, 10)}
                     placeholder="Condition"
                 />
                 <TrashBinOutline

@@ -1,6 +1,7 @@
 <svelte:options accessors />
 
 <script lang="ts">
+    import { updateAllP } from "@lib/util";
     import Block from "../Block.svelte";
     import { Select, Input } from "flowbite-svelte";
 
@@ -77,6 +78,7 @@ ${namebridge} = ${actionbridge.trim() == "" ? "undefined" : actionbridge};`}
             size="sm"
             class="w-40"
             bind:value={actionbridge}
+            on:change={() => setTimeout(updateAllP, 10)}
             placeholder="Value"
         />
     </div>

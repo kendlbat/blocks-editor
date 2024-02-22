@@ -4,6 +4,7 @@
     import Block from "../Block.svelte";
     import { Input } from "flowbite-svelte";
     import Program from "../Program.svelte";
+    import { updateAllP } from "@lib/util";
     export const id: string = "dowhile";
     export let destroy: () => void;
     export let p: {
@@ -44,6 +45,7 @@ do {`}
             class="w-40"
             bind:value={conditionbridge}
             placeholder="Condition"
+            on:change={() => setTimeout(updateAllP, 10)}
         />
     </div>
     <input

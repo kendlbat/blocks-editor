@@ -4,6 +4,7 @@
     import Block from "../Block.svelte";
     import { Input, Select } from "flowbite-svelte";
     import Program from "../Program.svelte";
+    import { updateAllP } from "@lib/util";
     export let destroy: () => void;
     export const id: string = "for";
     export let p: {
@@ -85,6 +86,7 @@ for (let ${variablebridge} = ${initialbridge}; ${variablebridge} ${
             size="sm"
             class="w-16 text-center"
             bind:value={initialbridge}
+            on:change={() => setTimeout(updateAllP, 10)}
             placeholder="Start"
         />
         <span class="pt-2"
@@ -99,6 +101,7 @@ for (let ${variablebridge} = ${initialbridge}; ${variablebridge} ${
             class={`w-16 text-center`}
             color={endbridge.trim() == "" ? "red" : "base"}
             bind:value={endbridge}
+            on:change={() => setTimeout(updateAllP, 10)}
             placeholder="End"
         />
         <span class="pt-2"
@@ -108,6 +111,7 @@ for (let ${variablebridge} = ${initialbridge}; ${variablebridge} ${
             size="sm"
             class="w-16 text-center"
             bind:value={incrementbridge}
+            on:change={() => setTimeout(updateAllP, 10)}
             color={incrementbridge === undefined || incrementbridge.trim() == ""
                 ? "red"
                 : "base"}
