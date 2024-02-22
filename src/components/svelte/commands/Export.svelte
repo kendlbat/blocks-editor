@@ -65,8 +65,9 @@
         };
         input.click();
     };
-
-    $: localStorage.setItem("bbe-mainprogram", JSON.stringify($mainprogram));
+    window.addEventListener("beforeunload", () => {
+        localStorage.setItem("bbe-mainprogram", JSON.stringify($mainprogram));
+    });
 
     let stored = localStorage.getItem("bbe-mainprogram");
     if (stored) {
