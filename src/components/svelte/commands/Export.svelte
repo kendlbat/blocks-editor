@@ -65,6 +65,13 @@
         };
         input.click();
     };
+
+    $: localStorage.setItem("bbe-mainprogram", JSON.stringify($mainprogram));
+
+    let stored = localStorage.getItem("bbe-mainprogram");
+    if (stored) {
+        mainprogram.set(JSON.parse(stored));
+    }
 </script>
 
 <Button on:click={exportJS}>
